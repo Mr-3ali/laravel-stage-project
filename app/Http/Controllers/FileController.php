@@ -80,32 +80,17 @@ class FileController extends Controller
         return redirect()->route('admin.files.index')->with('success', 'File deleted successfully.');
     }
 
-    public function getFilePath($id)
-    {
-        $file = File::findOrFail($id);
-        return Storage::disk('public')->url($file->path);
-    }
-
+    
 
     public function preview(File $file)
     {
-        // Ensure the file exists
         if (!Storage::disk('public')->exists($file->path)) {
             abort(404, 'File not found');
-        }
-
+        }    
         $path = Storage::disk('public')->path($file->path);
 
         return response()->file($path);
     }
 
-    public function download(File $file)
-    {
-        if (!Storage::disk('public')->exists($file->path)) {
-            abort(404);
-        }
-
-        $filePath = Storage::disk('public')->path($file->path);
-        return response()->download($filePath);
-    }
+    
 }
