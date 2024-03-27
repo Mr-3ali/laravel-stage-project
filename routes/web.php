@@ -41,10 +41,11 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->name('admin.')->group(
     
     Route::resource('files', FileController::class)->names('files');
 
-    Route::get('/folders/assign', [FolderController::class, 'assign'])->name('admin.assign-folders');
-    Route::post('/folders/assign-folders', [FolderController::class, 'store_assign'])->name('folders.assign.store');
+    Route::get('/assign', [FolderController::class, 'assign'])->name('assign-folders');
+    Route::post('/assign-folders', [FolderController::class, 'store_assign'])->name('folders.assign.store');
 
-    Route::get('/users-folders', [UserController::class, 'usersFolders'])->name('admin.users-folders');
+    Route::get('/users-folders', [UserController::class, 'usersFolders'])->name('users-folders');
+    Route::get('/folders/{folder}', [FolderController::class, 'files'])->name('user.folders');
 
  });
 

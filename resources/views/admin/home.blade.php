@@ -18,12 +18,12 @@
                     </a>
                 </div>
 
-                <!-- Files Management -->
+                <!-- assign Management -->
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                    <h3 class="font-semibold text-lg text-gray-800 leading-tight">Files Management</h3>
-                    <p>Manage the files within your application.</p>
-                    <a href="{{ route('admin.files.index') }}" class="text-blue-600 hover:text-blue-800">
-                        <i class="fas fa-file"></i> Manage Files
+                    <h3 class="font-semibold text-lg text-gray-800 leading-tight">Folders Assignment</h3>
+                    <p>Assign folders to users.</p>
+                    <a href="{{ route('admin.assign-folders') }}" class="text-blue-600 hover:text-blue-800">
+                        <i class="fas fa-folder-plus"></i> Assign Folders
                     </a>
                 </div>
 
@@ -33,6 +33,15 @@
                     <p>Organize and manage your folders.</p>
                     <a href="{{ route('admin.folders.index') }}" class="text-blue-600 hover:text-blue-800">
                         <i class="fas fa-folder"></i> Manage Folders
+                    </a>
+                </div>
+
+                <!-- Files Management -->
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
+                    <h3 class="font-semibold text-lg text-gray-800 leading-tight">Files Management</h3>
+                    <p>Manage the files within your application.</p>
+                    <a href="{{ route('admin.files.index') }}" class="text-blue-600 hover:text-blue-800">
+                        <i class="fas fa-file"></i> Manage Files
                     </a>
                 </div>
             </div>

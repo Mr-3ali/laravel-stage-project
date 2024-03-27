@@ -53,23 +53,29 @@ class FolderController extends Controller
         return view('user.files', compact('files', 'folder'));
     }
 
-    public function assign()
-{
-    $users = User::where('is_admin', false)->get(); // only non-admin user
-    $folders = Folder::all();
-    return view('admin.folders.assign', compact('users', 'folders'));
-}
+    public function assign(Request $request)
+    {
+        $users = User::where('is_admin', false)->get();
+        $folders = Folder::all();
+        $selectedUserId = $request->input('user_id', $users->first()?->id ?? null);
+        $selectedUserFolders = [];
 
+        if ($selectedUserId) {
+            $selectedUser = User::with('folders')->findOrFail($selectedUserId);
+            $selectedUserFolders = $selectedUser->folders->pluck('id')->toArray();
+        }
 
+        return view('admin.folders.assign', compact('users', 'folders', 'selectedUserId', 'selectedUserFolders'));
+    }
 
     public function store_assign(Request $request)
     {
         $userId = $request->input('user_id');
-        $folderIds = $request->input('folder_ids');
+        $folderIds = $request->input('folder_ids') ?: [];
 
         $user = User::findOrFail($userId);
         $user->folders()->sync($folderIds);
 
-        return redirect()->route('admin.folders.index')->with('success', 'Folders assigned successfully.');
+        return redirect()->route('admin.users-folders')->with('success', 'Folders assigned successfully.');
     }
 }

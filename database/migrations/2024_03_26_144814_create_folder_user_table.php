@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('folder_user', function (Blueprint $table) {
-            $table->foreignId('folder_id')->constrained()->onDelete('cascade');
+        Schema::create('user_folder', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('folder_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -23,8 +24,8 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('folder_user');
+        Schema::dropIfExists('user_folder');
     }
 };

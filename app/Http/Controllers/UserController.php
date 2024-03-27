@@ -14,14 +14,14 @@ class UserController extends Controller
 {
     //
     public function folders()
-{
-    // folders assigned to this particular user
-    
-    $folders = auth()->user()->folders;
+    {
+        // folders assigned to this particular user
 
-    return view('user.folders', compact('folders'));
-}
-    
+        $folders = auth()->user()->folders;
+
+        return view('user.folders', compact('folders'));
+    }
+
     public function adminHome()
     {
         // You can pass necessary data to the view
@@ -67,14 +67,16 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::all(); 
+        $users = User::all();
         return view('admin.dashboard', compact('users'));
     }
 
     public function usersFolders()
-{
-    $users = User::where('is_admin', false)->with('folders')->get(); 
-    return view('admin.folders.users-folders', compact('users'));
-}
+    {
+        $users = User::where('is_admin', false)->with('folders')->get();
+        return view('admin.folders.users-folders', compact('users'));
 
+        // $users = User::where('is_admin', false)->with('folders')->get(); 
+        // return view('admin.folders.users-folders', compact('users'));
+    }
 }
