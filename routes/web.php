@@ -35,11 +35,18 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->name('admin.')->group(
     Route::delete('/users/{user}', [ProfileController::class, 'destroy'])->name('users.destroy');
 
 
-    Route::resource('folders', FolderController::class)->names('folders');
+    // Route::resource('folders', FolderController::class)->names('folders');
+    Route::resource('folders', FolderController::class)->names('folders')->except(['show']);
+
     
     Route::resource('files', FileController::class)->names('files');
 
-});
+    Route::get('/folders/assign', [FolderController::class, 'assign'])->name('admin.assign-folders');
+    Route::post('/folders/assign-folders', [FolderController::class, 'store_assign'])->name('folders.assign.store');
+
+    Route::get('/users-folders', [UserController::class, 'usersFolders'])->name('admin.users-folders');
+
+ });
 
 Route::middleware(['auth'])->prefix('user')->name('user.')->group(function () {
     Route::get('/folders', [UserController::class, 'folders'])->name('folders');

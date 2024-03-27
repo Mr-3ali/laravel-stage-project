@@ -11,7 +11,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
+/**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
@@ -20,7 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'is_admin', // Assuming you have this column in your users table
+        'is_admin',
     ];
 
     /**
@@ -40,17 +40,13 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'is_admin' => 'boolean', // Cast is_admin as boolean
+        'is_admin' => 'boolean',
     ];
 
-    /**
-     * Get the folders owned by the user.
-     */
     public function folders()
     {
-        return $this->hasMany(Folder::class);
         return $this->belongsToMany(Folder::class);
-
     }
+ 
 
 }

@@ -17,16 +17,22 @@ class File extends Model
         'folder_id',
     ];
 
+    /**
+     * Get the user that owns the file.
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
-        
+
     }
 
+    /**
+     * Get the folder that owns the file.
+     */
     public function folder()
     {
         return $this->belongsTo(Folder::class);
     }
-    
 
+    
 }

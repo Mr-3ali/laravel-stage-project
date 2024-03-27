@@ -54,7 +54,7 @@
                                                         {{ $folder->name }}
                                                     </td>
                                                     <td class="px-6 py-4 whitespace-nowrap text-center">
-                                                        {{ $folder->user->name }}
+                                                        {{ $folder->user->name }}  
                                                     </td>
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                                         <div class="flex items-center justify-center space-x-6">

@@ -13,11 +13,14 @@ use Illuminate\Support\Facades\Validator;
 class UserController extends Controller
 {
     //
-     public function folders()
-    {
-        $folders = Folder::all();
-        return view('user.folders', compact('folders'));
-    }
+    public function folders()
+{
+    // folders assigned to this particular user
+    
+    $folders = auth()->user()->folders;
+
+    return view('user.folders', compact('folders'));
+}
     
     public function adminHome()
     {
@@ -67,4 +70,11 @@ class UserController extends Controller
         $users = User::all(); 
         return view('admin.dashboard', compact('users'));
     }
+
+    public function usersFolders()
+{
+    $users = User::where('is_admin', false)->with('folders')->get(); 
+    return view('admin.folders.users-folders', compact('users'));
+}
+
 }
