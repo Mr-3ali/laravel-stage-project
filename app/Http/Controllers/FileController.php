@@ -17,7 +17,7 @@ class FileController extends Controller
 
     public function create()
     {
-        $folders = Folder::all();
+        $folders = Folder::all(); // Admin can see all folders
 
         if ($folders->isEmpty()) {
             return redirect()->route('admin.folders.create')
@@ -39,7 +39,7 @@ class FileController extends Controller
         $file = $request->file('path');
         $path = $file->store('files', 'public');
 
-        $fileModel = new File([
+        File::create([
             'title' => $request->title,
             'type' => $file->getClientOriginalExtension(),
             'path' => $path,
@@ -47,11 +47,9 @@ class FileController extends Controller
             'folder_id' => $request->folder_id
         ]);
 
-        $fileModel->save();
-
-
         return redirect()->route('admin.files.index')->with('success', 'File uploaded successfully.');
     }
+
 
     public function edit(File $file)
     {
@@ -80,17 +78,15 @@ class FileController extends Controller
         return redirect()->route('admin.files.index')->with('success', 'File deleted successfully.');
     }
 
-    
+
 
     public function preview(File $file)
     {
         if (!Storage::disk('public')->exists($file->path)) {
             abort(404, 'File not found');
-        }    
+        }
         $path = Storage::disk('public')->path($file->path);
 
         return response()->file($path);
     }
-
-    
 }
