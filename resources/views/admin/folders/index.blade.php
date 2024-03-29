@@ -8,7 +8,11 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="col-span-5 text-center">
+                <a href="{{ route('admin.folders.create') }}" class="text-blue-600 hover:text-blue-800">Create a folder</a>
+           </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="grid grid-cols-5 gap-4">
                         @forelse ($folders as $folder)
