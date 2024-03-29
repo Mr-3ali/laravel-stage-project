@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-md mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <!-- User Selection -->
@@ -31,7 +31,7 @@
 
                             <div class="mt-4">
                                 <label for="folder_ids" class="block font-medium text-sm text-gray-700">{{ __('Select Folders') }}</label>
-                                <div class="mt-1 w-full">
+                                <div class="mt-1 w-full h-64 overflow-y-auto border border-gray-200 rounded-lg p-2">
                                     @foreach ($folders as $folder)
                                         <div class="flex items-center mb-2">
                                             <input type="checkbox" name="folder_ids[]" id="folder_{{ $folder->id }}" value="{{ $folder->id }}" {{ in_array($folder->id, $selectedUserFolders) ? 'checked' : '' }} class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">

@@ -10,29 +10,41 @@ class FolderController extends Controller
 {
     public function index()
     {
-        $folders = Folder::all();
+        $folders = Folder::with('user')
+                          ->orderBy('created_at', 'desc')
+                          ->paginate(20); 
         return view('admin.folders.index', compact('folders'));
     }
-
+    
     public function create()
     {
-        return view('admin.folders.create');
+        $folders = Folder::all(); // Get all folders
+        return view('admin.folders.create', compact('folders'));
     }
+    
 
     public function store(Request $request)
     {
-        $request->validate(['name' => 'required|string|max:255']);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'parent_id' => 'nullable|exists:folders,id' // Allow null and must exist in the folder table
+        ]);
+    
         Folder::create([
             'name' => $request->name,
-            'user_id' => auth()->id()
+            'user_id' => auth()->id(),
+            'parent_id' => $request->parent_id //parentid
         ]);
+    
         return redirect()->route('admin.folders.index')->with('success', 'Folder created successfully.');
     }
-
+    
     public function edit(Folder $folder)
     {
-        return view('admin.folders.edit', compact('folder'));
+        $folders = Folder::where('id', '!=', $folder->id)->get(); // Exclude the current folder to prevent selecting itself as a parent
+        return view('admin.folders.edit', compact('folder', 'folders'));
     }
+    
 
     public function update(Request $request, Folder $folder)
     {

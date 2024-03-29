@@ -15,9 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('parent_id')->nullable(); 
+            $table->foreign('parent_id')->references('id')->on('folders')->onDelete('set null');// reffers itself
             $table->timestamps();
         });
     }
+    
     /**
      * Reverse the migrations.
      */
