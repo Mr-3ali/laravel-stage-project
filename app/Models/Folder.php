@@ -12,7 +12,6 @@ class Folder extends Model
     protected $fillable = [
         'name',
         'user_id',
-        'parent_id'//
     ];
 
     public function user()
@@ -20,19 +19,11 @@ class Folder extends Model
         return $this->belongsTo(User::class);
     }
 
+
+
+    
     public function files()
     {
         return $this->hasMany(File::class);
     }
-
-    public function parent()
-    {
-        return $this->belongsTo(Folder::class, 'parent_id');
-    }
-
-    public function children()
-    {
-        return $this->hasMany(Folder::class, 'parent_id');
-    }
-
 }
